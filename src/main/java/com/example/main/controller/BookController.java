@@ -1,7 +1,8 @@
-package com.example.books.controller;
+package com.example.main.controller;
 
-import com.example.books.model.Book;
-import com.example.books.service.BookService;
+import com.example.main.dto.GetBookResponse;
+import com.example.main.model.BookEntity;
+import com.example.main.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,28 +22,33 @@ public class BookController {
     }
 
     @RequestMapping(value="/books",method= RequestMethod.POST)
-    public Book createBook(@RequestBody Book book){
+    public BookEntity createBook(@RequestBody BookEntity book){
         return bookService.createBook(book);
     }
 
     @RequestMapping(value="/books",method=RequestMethod.GET)
-    public List<Book> readBooks(){
+    public List<BookEntity> readBooks(){
         return bookService.getBooks();
     }
 
     @RequestMapping(value="/books/{bookId}",method = RequestMethod.GET)
-    public Optional<Book> getBookById(@PathVariable(value="bookId") Long id){
+    public GetBookResponse getBookById(@PathVariable(value="bookId") Integer id){
         return bookService.getBookById(id);
     }
 
     @RequestMapping(value="/books/{bookId}", method=RequestMethod.PUT)
-        public Book updateBook(@PathVariable(value="bookId") Long id,@RequestBody Book bookDetails){
+        public BookEntity updateBook(@PathVariable(value="bookId") Integer id,@RequestBody BookEntity bookDetails){
         return bookService.updateBook(id, bookDetails);
     }
 
 
     @RequestMapping(value="/books/{IdOfBook}", method=RequestMethod.DELETE)
-    public void deleteBook(@PathVariable(value="IdOfBook") Long id){
+    public void deleteBook(@PathVariable(value="IdOfBook") Integer id){
        bookService.deleteBook(id);
+    }
+
+    @GetMapping("/books/filtered")
+    public List<String> getFilteredBAuthors() {
+        return bookService.getFilteredBooks();
     }
 }

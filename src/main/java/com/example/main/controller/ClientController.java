@@ -1,7 +1,7 @@
-package com.example.client.controller;
+package com.example.main.controller;
 
-import com.example.client.model.Client;
-import com.example.client.service.ClientService;
+import com.example.main.model.ClientEntity;
+import com.example.main.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,28 +14,23 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
-    @GetMapping("/test")
-    public String test(){
-        return "Merge";
-    }
-
     @PostMapping("/clients")
-    public Client createClient(@RequestBody Client client){
+    public ClientEntity createClient(@RequestBody ClientEntity client){
         return clientService.createClient(client);
     }
 
     @RequestMapping(value="/clients",method =RequestMethod.GET)
-    public List<Client> readClients(){
+    public List<ClientEntity> readClients(){
         return clientService.getClients();
     }
 
     @RequestMapping(value="/clients/{clientId}",method = RequestMethod.PUT)
-    public Client updateClient(@PathVariable(value="clientId") Long id, @RequestBody Client clientDetails){
+    public ClientEntity updateClient(@PathVariable(value="clientId") Integer id, @RequestBody ClientEntity clientDetails){
         return clientService.updateClient(id,clientDetails);
     }
 
-    @RequestMapping(value="/clients/{clientId",method = RequestMethod.DELETE)
-    public void deleteClient(@PathVariable(value="clientId") Long id){
+    @RequestMapping(value="/clients/{clientId}",method = RequestMethod.DELETE)
+    public void deleteClient(@PathVariable(value="clientId") Integer id){
         clientService.deleteClient(id);
     }
 

@@ -1,7 +1,7 @@
-package com.example.client.service;
+package com.example.main.service;
 
-import com.example.client.model.Client;
-import com.example.client.repository.ClientRepository;
+import com.example.main.model.ClientEntity;
+import com.example.main.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,20 +13,20 @@ public class ClientService {
     @Autowired
     ClientRepository clientRepository;
 
-    public Client createClient(Client client){
+    public ClientEntity createClient(ClientEntity client){
         return clientRepository.save(client);
     }
 
-    public List<Client> getClients(){
+    public List<ClientEntity> getClients(){
         return clientRepository.findAll();
     }
 
-    public void deleteClient(long clientId){
+    public void deleteClient(Integer clientId){
         clientRepository.deleteById(clientId);
     }
 
-    public Client updateClient(Long clientId, Client clientDetails){
-        Client client=clientRepository.findById(clientId).get();
+    public ClientEntity updateClient(Integer clientId, ClientEntity clientDetails){
+        ClientEntity client=clientRepository.findById(clientId).get();
         client.setName(clientDetails.getName());
         return clientRepository.save(client);
     }
