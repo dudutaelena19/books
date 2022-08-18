@@ -40,8 +40,8 @@ public class BookController {
         return bookService.updateBook(id, bookDetails);
     }
 
-    @RequestMapping(value="/books/{bookId}", method=RequestMethod.DELETE)
-    public void deleteBook(@PathVariable(value="bookId") Long id){
+    @RequestMapping(value="/books/{IdOfBook}", method=RequestMethod.DELETE)
+    public void deleteBook(@PathVariable(value="IdOfBook") Long id){
        bookService.deleteBook(id);
     }
 }
